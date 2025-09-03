@@ -5,7 +5,8 @@ const toUsdBtn = document.getElementById('toUsd');
 const resultDiv = document.getElementById('result');
 const loader = document.getElementById('loader');
 
-const API_URL = "https://api.coindesk.com/v1/bpi/currentprice/USD.json";
+// Use CoinGecko API instead of Coindesk
+const API_URL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd";
 
 // Utility to show loader
 function showLoader(show) {
@@ -19,7 +20,7 @@ async function getBTCPrice() {
     const res = await fetch(API_URL);
     const data = await res.json();
     showLoader(false);
-    return data.bpi.USD.rate_float;
+    return data.bitcoin.usd;
   } catch (err) {
     showLoader(false);
     resultDiv.textContent = "Failed to fetch BTC price.";
